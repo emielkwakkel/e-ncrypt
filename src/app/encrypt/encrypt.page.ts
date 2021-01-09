@@ -20,7 +20,16 @@ export class EncryptPage implements OnInit {
     });
   }
 
-  onSubmit() {
+  encrypt() {
+    this.submitted = true;
+    if (!this.encryptForm.valid) {
+      return false;
+    }
+
+    console.log(this.encryptForm.value);
+  }
+
+  decrypt() {
     this.submitted = true;
     if (!this.encryptForm.valid) {
       return false;

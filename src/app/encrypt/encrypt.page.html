@@ -14,7 +14,7 @@
   </ion-header>
   <ion-card>
     <ion-card-content>
-      <form [formGroup]="encryptForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="encryptForm">
         <ion-item lines="full">
           <ion-label>Key</ion-label>
           <ion-input formControlName="key" type="password"></ion-input>
@@ -34,7 +34,16 @@
         </span>
         <ion-row>
           <ion-col>
-            <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+            <ion-button type="submit" color="success" expand="block" (click)="encrypt()">
+              <ion-icon slot="start" name="eye-outline"></ion-icon>
+              Encrypt
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block" (click)="decrypt()">
+              <ion-icon slot="start" name="eye-off-outline"></ion-icon>
+              Decrypt
+            </ion-button>
           </ion-col>
         </ion-row>
       </form>
