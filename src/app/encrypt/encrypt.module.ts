@@ -1,7 +1,7 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { EncryptPage } from './encrypt.page';
 
 import { EncryptPageRoutingModule } from './encrypt-routing.module';
@@ -10,7 +10,6 @@ import { EncryptPageRoutingModule } from './encrypt-routing.module';
   imports: [
     CommonModule,
     EncryptPageRoutingModule,
-    FormsModule,
     IonicModule,
     ReactiveFormsModule,
   ],
