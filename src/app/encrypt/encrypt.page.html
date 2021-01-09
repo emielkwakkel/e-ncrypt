@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      {{ title }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="encryptForm" (ngSubmit)="onSubmit()">
+        <ion-item lines="full">
+          <ion-label>Key</ion-label>
+          <ion-input formControlName="key" type="password"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted && error.key.errors?.required">
+          Key is required
+        </span>
+        <span class="error ion-padding" *ngIf="submitted && error.key.errors?.minLength">
+          Min 5 chars required
+        </span>
+        <ion-item lines="full">
+          <ion-label>Content to encrypt</ion-label>
+          <ion-textarea formControlName="content"></ion-textarea>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="submitted && error.content.errors?.required">
+          Enter content to encrypt
+        </span>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <app-explore-container name="{{ title }} page"></app-explore-container>
+</ion-content>
