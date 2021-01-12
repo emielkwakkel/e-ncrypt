@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CryptoService } from './crypto.service';
 
 @Component({
   selector: 'app-encrypt',
@@ -11,11 +12,14 @@ export class EncryptPage implements OnInit {
   title = 'Encrypt';
   submitted = false;
 
-  constructor(public formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private cryptoService: CryptoService,
+  ) {}
 
   ngOnInit() {
     this.encryptForm = this.formBuilder.group({
-      key: ['', [Validators.required, Validators.minLength(5)]],
+      key: ['', [Validators.required, Validators.minLength(3)]],
       content: ['', [Validators.required]],
     });
   }
@@ -25,8 +29,14 @@ export class EncryptPage implements OnInit {
     if (!this.encryptForm.valid) {
       return false;
     }
+    console.log(this.encryptForm.controls.content.value, this.encryptForm.controls.key.value);
 
-    console.log(this.encryptForm.value);
+    this.encryptForm.controls.content.setValue(
+      this.cryptoService.encrypt(
+        this.encryptForm.controls.content.value,
+        this.encryptForm.controls.key.value
+      )
+    );
   }
 
   decrypt() {
@@ -35,7 +45,12 @@ export class EncryptPage implements OnInit {
       return false;
     }
 
-    console.log(this.encryptForm.value);
+    this.encryptForm.controls.content.setValue(
+      this.cryptoService.decrypt(
+        this.encryptForm.controls.content.value,
+        this.encryptForm.controls.key.value
+      )
+    );
   }
 
   get error() {

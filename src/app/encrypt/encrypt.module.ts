@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EncryptPage } from './encrypt.page';
 
 import { EncryptPageRoutingModule } from './encrypt-routing.module';
+import { CryptoService } from './crypto.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { EncryptPageRoutingModule } from './encrypt-routing.module';
     IonicModule,
     ReactiveFormsModule,
   ],
-  declarations: [EncryptPage]
+  declarations: [ EncryptPage ],
+  providers: [ CryptoService ],
 })
 export class EncryptPageModule {}

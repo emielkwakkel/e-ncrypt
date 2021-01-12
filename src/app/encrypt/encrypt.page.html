@@ -16,7 +16,7 @@
     <ion-card-content>
       <form [formGroup]="encryptForm">
         <ion-item lines="full">
-          <ion-label>Key</ion-label>
+          <ion-label position="stacked">Password</ion-label>
           <ion-input formControlName="key" type="password"></ion-input>
         </ion-item>
         <span class="error ion-padding" *ngIf="submitted && error.key.errors?.required">
@@ -26,8 +26,8 @@
           Min 5 chars required
         </span>
         <ion-item lines="full">
-          <ion-label>Content to encrypt</ion-label>
-          <ion-textarea formControlName="content"></ion-textarea>
+          <ion-label position="stacked">Content</ion-label>
+          <ion-textarea formControlName="content" rows="15"></ion-textarea>
         </ion-item>
         <span class="error ion-padding" *ngIf="submitted && error.content.errors?.required">
           Enter content to encrypt
