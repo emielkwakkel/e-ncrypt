@@ -12,41 +12,37 @@
       <ion-title size="large">{{ title }}</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-card>
-    <ion-card-content>
-      <form [formGroup]="encryptForm">
-        <ion-item lines="full">
-          <ion-label position="stacked">Password</ion-label>
-          <ion-input formControlName="key" type="password"></ion-input>
-        </ion-item>
-        <span class="error ion-padding" *ngIf="submitted && error.key.errors?.required">
-          Key is required
-        </span>
-        <span class="error ion-padding" *ngIf="submitted && error.key.errors?.minLength">
-          Min 5 chars required
-        </span>
-        <ion-item lines="full">
-          <ion-label position="stacked">Content</ion-label>
-          <ion-textarea formControlName="content" rows="15"></ion-textarea>
-        </ion-item>
-        <span class="error ion-padding" *ngIf="submitted && error.content.errors?.required">
-          Enter content to encrypt
-        </span>
-        <ion-row>
-          <ion-col>
-            <ion-button type="submit" color="success" expand="block" (click)="encrypt()">
-              <ion-icon slot="start" name="eye-outline"></ion-icon>
-              Encrypt
-            </ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button type="submit" color="danger" expand="block" (click)="decrypt()">
-              <ion-icon slot="start" name="eye-off-outline"></ion-icon>
-              Decrypt
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </form>
-    </ion-card-content>
-  </ion-card>
+  <form [formGroup]="encryptForm">
+    <ion-item lines="full">
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input formControlName="key" type="password"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="submitted && error.key.errors?.required">
+      Key is required
+    </span>
+    <span class="error ion-padding" *ngIf="submitted && error.key.errors?.minLength">
+      Min 5 chars required
+    </span>
+    <ion-item lines="full">
+      <ion-label position="stacked">Content</ion-label>
+      <ion-textarea formControlName="content" rows="15"></ion-textarea>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="submitted && error.content.errors?.required">
+      Enter content to encrypt
+    </span>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="success" expand="block" (click)="encrypt()">
+          <ion-icon slot="start" name="eye-outline"></ion-icon>
+          Encrypt
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block" (click)="decrypt()">
+          <ion-icon slot="start" name="eye-off-outline"></ion-icon>
+          Decrypt
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
