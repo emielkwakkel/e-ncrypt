@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PartialObserver } from 'rxjs';
+import { SettingsService } from './settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,28 +9,34 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['settings.page.scss']
 })
 export class SettingsPage {
+  public darkModeEnabled = this.settingsService.darkModeEnabled;
   public settingsForm: FormGroup;
   public title = 'Settings';
-  public darkModeEnabled = this.isDarkModePreferred().matches;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private settingsService: SettingsService,
+  ) {}
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
-      darkMode: [this.darkModeEnabled]
+      darkMode: [this.darkModeEnabled],
     });
 
-    this.isDarkModePreferred()
+    this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
+      this.settingsService.darkModeEnabled = selectedValue;
+    })
+
+    // Check if dark mode preference on device changes
+    this.settingsService.isDarkModePreferred()
       .addEventListener('change', (event) => {
-        return this.checkToggle(event.matches);
+        return this.checkDarkModeToggle(event.matches);
       });
   }
 
-  checkToggle(shouldCheck: boolean) {
-    this.settingsForm.get('darkMode').setValue(shouldCheck);
-  }
-
-  isDarkModePreferred(): MediaQueryList {
-    return window.matchMedia('(prefers-color-scheme: dark)');
+  checkDarkModeToggle(shouldCheck: boolean) {
+    this.settingsForm
+      .get('darkMode')
+      .setValue(shouldCheck);
   }
 }
