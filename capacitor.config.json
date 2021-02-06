@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "ek.e-ncrypt.main",
   "appName": "e-ncrypt",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -11,9 +11,9 @@
   },
   "cordova": {},
   "server": {
-    "url": "http://localhost:8101",
+    "url": "http://localhost:8103",
     "cleartext": true,
-    "originalUrl": "http://localhost:8100",
+    "originalUrl": "http://localhost:8101",
     "originalCleartext": true
   }
 }
