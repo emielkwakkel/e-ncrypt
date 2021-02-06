@@ -17,10 +17,9 @@ export class SettingsPage implements OnInit {
   ) {
   }
 
-  async ngOnInit() {
-    const darkModeEnabled = await this.settingsService.darkModeEnabled$.pipe().toPromise();
+  ngOnInit() {
     this.settingsForm = this.formBuilder.group({
-      darkMode: [darkModeEnabled],
+      darkMode: [this.settingsService.darkModeEnabled.value],
     });
 
     this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
