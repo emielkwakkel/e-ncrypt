@@ -8,9 +8,9 @@ import { CryptoService } from './crypto.service';
   styleUrls: ['encrypt.page.scss']
 })
 export class EncryptPage implements OnInit {
-  encryptForm: FormGroup;
-  title = 'Encrypt';
-  submitted = false;
+  public encryptForm: FormGroup;
+  public title = 'Encrypt';
+  public submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
