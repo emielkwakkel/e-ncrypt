@@ -6,6 +6,8 @@ export enum Algoritms {
   TrippleDES = 'TrippleDES',
   Rabbit = 'Rabbit'
 }
+
+const iv = CryptoJS.enc.Hex.parse('6673236444466877242372777172656d6e266278753369795e6632333471772c2e');
 export class CryptoService {
   encrypt(
     content: string,
@@ -13,7 +15,7 @@ export class CryptoService {
     algorithm: AlgorithmOptions = Algoritms.AES
   ) {
     return CryptoJS[algorithm]
-      .encrypt(content, secretKey)
+      .encrypt(content, secretKey, { iv })
       .toString();
   }
   
@@ -23,7 +25,7 @@ export class CryptoService {
     algorithm: AlgorithmOptions = Algoritms.AES
   ) {
     return CryptoJS[algorithm]
-      .decrypt(content, secretKey)
+      .decrypt(content, secretKey, { iv })
       .toString(CryptoJS.enc.Utf8);
   }
 }
