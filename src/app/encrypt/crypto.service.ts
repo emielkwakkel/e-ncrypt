@@ -8,6 +8,7 @@ export class CryptoService {
   ) {
     return CryptoJS[algorithm]
       .encrypt(content, secretKey)
+      .toString();
   }
   
   decrypt(

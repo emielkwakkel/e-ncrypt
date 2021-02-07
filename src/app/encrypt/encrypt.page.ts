@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Plugins } from '@capacitor/core';
+import { AppService } from '../app.service';
 import { CryptoService } from './crypto.service';
+const { Share } = Plugins;
 
 @Component({
   selector: 'app-encrypt',
@@ -11,8 +14,10 @@ export class EncryptPage implements OnInit {
   public encryptForm: FormGroup;
   public title = 'Encrypt';
   public submitted = false;
+  public platform: 'ios' | 'android' | 'electron' | 'web';
 
   constructor(
+    private appService: AppService,
     private formBuilder: FormBuilder,
     private cryptoService: CryptoService,
   ) {}
@@ -22,6 +27,9 @@ export class EncryptPage implements OnInit {
       key: ['', [Validators.required, Validators.minLength(3)]],
       content: ['', [Validators.required]],
     });
+    this.appService.device.then(({ platform }) => {
+      this.platform = platform;
+    })
   }
 
   encrypt() {
@@ -29,7 +37,6 @@ export class EncryptPage implements OnInit {
     if (!this.encryptForm.valid) {
       return false;
     }
-    console.log(this.encryptForm.controls.content.value, this.encryptForm.controls.key.value);
 
     this.encryptForm.controls.content.setValue(
       this.cryptoService.encrypt(
@@ -37,6 +44,20 @@ export class EncryptPage implements OnInit {
         this.encryptForm.controls.key.value
       )
     );
+  }
+
+  async copyOrShare(text: string) {
+    (this.platform !== 'web')
+      ? await this.share(text)
+      : await this.copy(text);
+  }
+
+  async share(text: string) {
+    await Share.share({ text });
+  }
+
+  async copy(text: string) {
+    await navigator.clipboard.writeText(text);
   }
 
   decrypt() {

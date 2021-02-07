@@ -25,7 +25,7 @@
     </span>
     <ion-item lines="full">
       <ion-label position="stacked">Content</ion-label>
-      <ion-textarea formControlName="content" rows="15"></ion-textarea>
+      <ion-textarea formControlName="content" rows="5"></ion-textarea>
     </ion-item>
     <span class="error ion-padding" *ngIf="submitted && error.content.errors?.required">
       Enter content to encrypt
@@ -41,6 +41,14 @@
         <ion-button type="submit" color="danger" expand="block" (click)="decrypt()">
           <ion-icon slot="start" name="eye-outline"></ion-icon>
           Decrypt
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="light" expand="block" (click)="copyOrShare(encryptForm.get('content').value)">
+          <ion-icon slot="start" [name]="(platform !== 'web') ? 'share-outline' : 'clipboard-outline'"></ion-icon>
+          {{ (platform !== 'web') ? 'Share' : 'Copy' }}
         </ion-button>
       </ion-col>
     </ion-row>
