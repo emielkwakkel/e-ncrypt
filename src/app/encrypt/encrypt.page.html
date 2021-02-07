@@ -13,42 +13,43 @@
     </ion-toolbar>
   </ion-header>
   <form [formGroup]="encryptForm">
-    <ion-item lines="full">
-      <ion-label position="stacked">Password</ion-label>
-      <ion-input formControlName="key" type="password"></ion-input>
-    </ion-item>
-    <span class="error ion-padding" *ngIf="submitted && error.key.errors?.required">
-      Key is required
-    </span>
-    <span class="error ion-padding" *ngIf="submitted && error.key.errors?.minLength">
-      Min 5 chars required
-    </span>
-    <ion-item lines="full">
-      <ion-label position="stacked">Content</ion-label>
-      <ion-textarea formControlName="content" rows="5"></ion-textarea>
-    </ion-item>
-    <span class="error ion-padding" *ngIf="submitted && error.content.errors?.required">
-      Enter content to encrypt
-    </span>
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="success" expand="block" (click)="encrypt()">
+        <ion-segment formControlName="type">
+          <ion-segment-button value="encrypt">
+            <ion-icon icon="eye-off-outline"></ion-icon>
+            <ion-label>Encrypt</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="decrypt">
+            <ion-icon icon="eye-outline"></ion-icon>
+            <ion-label>Decrypt</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-col>
+    </ion-row>
+    <ion-item lines="full" class="ion-padding-bottom">
+      <ion-label [color]="(hasErrors('key')) ? 'danger' : ''" position="stacked">Password</ion-label>
+      <ion-input [color]="(hasErrors('key')) ? 'danger' : ''" formControlName="key" type="password" autofocus placeholder="Min. 5 characters"></ion-input>
+    </ion-item>
+    <ion-item lines="full" class="ion-padding-bottom">
+      <ion-label [color]="(hasErrors('content')) ? 'danger' : ''" position="stacked">Content</ion-label>
+      <ion-textarea [color]="(hasErrors('content')) ? 'danger' : ''" formControlName="content" rows="5" [placeholder]="'Enter content to ' + ((type === 'encrypt') ? 'encrypt' : 'decrypt')"></ion-textarea>
+    </ion-item>
+    <ion-row class="ion-padding-horizontal">
+      <ion-col>
+        <ion-button type="submit" color="light" expand="block" (click)="copyOrShare(encryptForm.controls.content.value)" [disabled]="!encryptForm.controls.content.value">
+          <ion-icon slot="start" [name]="(platform !== 'web') ? 'share-outline' : 'clipboard-outline'"></ion-icon>
+          {{ (platform !== 'web') ? 'Share content' : 'Copy content' }}
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button *ngIf="type === 'encrypt'" type="submit" color="success" expand="block" (click)="encrypt()" [disabled]="!encryptForm.valid">
           <ion-icon slot="start" name="eye-off-outline"></ion-icon>
           Encrypt
         </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block" (click)="decrypt()">
+        <ion-button *ngIf="type === 'decrypt'" type="submit" color="danger" expand="block" (click)="decrypt()" [disabled]="!encryptForm.valid">
           <ion-icon slot="start" name="eye-outline"></ion-icon>
           Decrypt
-        </ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="light" expand="block" (click)="copyOrShare(encryptForm.get('content').value)">
-          <ion-icon slot="start" [name]="(platform !== 'web') ? 'share-outline' : 'clipboard-outline'"></ion-icon>
-          {{ (platform !== 'web') ? 'Share' : 'Copy' }}
         </ion-button>
       </ion-col>
     </ion-row>
