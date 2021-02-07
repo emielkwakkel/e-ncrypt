@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AlgorithmOptions } from '../encrypt/crypto.service';
 import { SettingsService } from './settings.service';
 
 @Component({
@@ -10,6 +11,9 @@ import { SettingsService } from './settings.service';
 export class SettingsPage implements OnInit {
   public settingsForm: FormGroup;
   public title = 'Settings';
+  algorithmActionSheetOptions: any = {
+    header: 'Select encryption algorythm',
+  };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,12 +23,16 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
+      algorithm: [this.settingsService.algorithm.value],
       darkMode: [this.settingsService.darkModeEnabled.value],
     });
-
+    this.settingsForm.get('algorithm').valueChanges.subscribe((selectedValue: AlgorithmOptions) => {
+      this.settingsService.algorithm.next(selectedValue)
+    });
     this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
       this.settingsService.setDarkModeEnabled(selectedValue);
-    })
+    });
+
 
     // Check if dark mode preference on device changes
     this.settingsService.isDarkModePreferred()

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Plugins } from '@capacitor/core';
 import { ToastController } from '@ionic/angular';
 import { AppService } from '../app.service';
+import { SettingsService } from '../settings/settings.service';
 import { CryptoService } from './crypto.service';
 const { Share } = Plugins;
 
@@ -23,6 +24,7 @@ export class EncryptPage implements OnInit {
     private formBuilder: FormBuilder,
     private cryptoService: CryptoService,
     private toastController: ToastController,
+    private settingsService: SettingsService,
   ) {}
 
   ngOnInit() {
@@ -49,7 +51,8 @@ export class EncryptPage implements OnInit {
     this.encryptForm.controls.content.setValue(
       this.cryptoService.encrypt(
         this.encryptForm.controls.content.value,
-        this.encryptForm.controls.key.value
+        this.encryptForm.controls.key.value,
+        this.settingsService.algorithm.value,
       )
     );
   }
@@ -64,7 +67,8 @@ export class EncryptPage implements OnInit {
     this.encryptForm.controls.content.setValue(
       this.cryptoService.decrypt(
         this.encryptForm.controls.content.value,
-        this.encryptForm.controls.key.value
+        this.encryptForm.controls.key.value,
+        this.settingsService.algorithm.value,
       )
     );
   }

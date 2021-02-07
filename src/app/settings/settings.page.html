@@ -26,12 +26,23 @@
 
   <form [formGroup]="settingsForm">
     <ion-list>
+      <ion-list-header>
+        <ion-label>Security</ion-label>
+      </ion-list-header>
       <ion-item>
-        <ion-label>Appearance</ion-label>
+        <ion-label>Algorithm</ion-label>
+        <ion-select [interfaceOptions]="algorithmActionSheetOptions" interface="action-sheet" formControlName="algorithm">
+          <ion-select-option value="AES">AES</ion-select-option>
+          <ion-select-option value="TripleDES">TripleDES</ion-select-option>
+          <ion-select-option value="Rabbit">Rabbit</ion-select-option>
+        </ion-select>
       </ion-item>
+      <ion-list-header>
+        <ion-label>Appearance</ion-label>
+      </ion-list-header>
       <ion-item>
+        <ion-icon slot="start" icon="contrast-outline"></ion-icon>
         <ion-label>
-          <ion-icon icon="contrast-outline"></ion-icon>
           Dark mode
         </ion-label>
         <ion-toggle formControlName="darkMode"></ion-toggle>
