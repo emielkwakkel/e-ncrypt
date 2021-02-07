@@ -11,7 +11,7 @@ import { SettingsService } from './settings/settings.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public darkModePreferred = this.settingsService.isDarkModePreferred().matches;
+  private darkModePreferred = this.settingsService.isDarkModePreferred().matches;
 
   constructor(
     private platform: Platform,
