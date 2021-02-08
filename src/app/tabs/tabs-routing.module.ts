@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('../encrypt/encrypt.module').then(m => m.EncryptPageModule)
       },
       {
+        path: 'hash',
+        loadChildren: () => import('../hash/hash.module').then(m => m.HashPageModule)
+      },
+      {
         path: 'settings',
         loadChildren: () => import('../settings/settings.module').then(m => m.SettingsPageModule)
       },
