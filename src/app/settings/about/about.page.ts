@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Plugins } from '@capacitor/core';
+const { Browser } = Plugins;
 
 @Component({
   selector: 'app-about',
@@ -6,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AboutPage {
   title = 'About';
+
+  browserOpen(url: string) {
+    Browser.open({ url });
+  }
 }
