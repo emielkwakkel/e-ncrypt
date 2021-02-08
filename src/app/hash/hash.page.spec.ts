@@ -9,8 +9,8 @@ describe('HashPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [HashPage],
-      imports: [IonicModule.forRoot()]
+      declarations: [ HashPage ],
+      imports: [ IonicModule.forRoot() ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HashPage);

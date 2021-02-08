@@ -9,12 +9,12 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+    loadChildren: () => import('./about/about.module').then(m => m.AboutPageModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [ RouterModule.forChild(routes) ],
+  exports: [ RouterModule ],
 })
 export class SettingsPageRoutingModule {}

@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { EncryptPage } from './encrypt.page';
 
@@ -10,8 +9,8 @@ describe('EncryptPage', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EncryptPage],
-      imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
+      declarations: [ EncryptPage ],
+      imports: [ IonicModule.forRoot() ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EncryptPage);
