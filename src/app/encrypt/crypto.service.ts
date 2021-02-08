@@ -14,10 +14,14 @@ export class CryptoService {
     secretKey: string,
     algorithm: AlgorithmOptions = Algorithms.AES,
     rounds: number,
-  ) {
-    return CryptoJS[algorithm]
-      .encrypt(content, secretKey, { iv })
-      .toString();
+  ): string {
+    Array.from(Array(rounds)).forEach(() => {
+      content = CryptoJS[algorithm]
+        .encrypt(content, secretKey, { iv })
+        .toString();
+    });
+
+    return content;
   }
   
   decrypt(
@@ -26,8 +30,11 @@ export class CryptoService {
     algorithm: AlgorithmOptions = Algorithms.AES,
     rounds: number,
   ) {
-    return CryptoJS[algorithm]
-      .decrypt(content, secretKey, { iv })
-      .toString(CryptoJS.enc.Utf8);
+    Array.from(Array(rounds)).forEach(() => {
+      content = CryptoJS[algorithm]
+        .decrypt(content, secretKey, { iv })
+        .toString(CryptoJS.enc.Utf8);
+    });
+    return content;
   }
 }
