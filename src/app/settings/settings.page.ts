@@ -9,21 +9,20 @@ import { SettingsService } from './settings.service';
   styleUrls: ['settings.page.scss']
 })
 export class SettingsPage implements OnInit {
+  public encryptionAlgorithmOptions: any = {
+    header: 'Select encryption algorithm',
+  };
+  public hashingAlgorithmOptions: any = {
+    header: 'Select hashing algorithm',
+  };
   public hashingAlgorithms = HashingAlgorithms;
   public settingsForm: FormGroup;
   public title = 'Settings';
-  public encryptionAlgorithmOptions: any = {
-    header: 'Select encryption algorythm',
-  };
-  public hashingAlgorithmOptions: any = {
-    header: 'Select hashing algorythm',
-  };
 
   constructor(
     private formBuilder: FormBuilder,
     private settingsService: SettingsService,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
@@ -39,13 +38,13 @@ export class SettingsPage implements OnInit {
     this.settingsForm.controls.hashingAlgorithm.valueChanges.subscribe((selectedValue: HashingAlgorithmOptions) => {
       this.settingsService.hashingAlgorithm.next(selectedValue);
     });
-    this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
+    this.settingsForm.controls.darkMode.valueChanges.subscribe((selectedValue: boolean) => {
       this.settingsService.setDarkModeEnabled(selectedValue);
     });
-    this.settingsForm.get('encryptionRounds').valueChanges.subscribe((selectedValue: number) => {
+    this.settingsForm.controls.encryptionRounds.valueChanges.subscribe((selectedValue: number) => {
       this.settingsService.encryptionRounds.next(selectedValue);
     });
-    this.settingsForm.get('hashingRounds').valueChanges.subscribe((selectedValue: number) => {
+    this.settingsForm.controls.hashingRounds.valueChanges.subscribe((selectedValue: number) => {
       this.settingsService.hashingRounds.next(selectedValue);
     });
 
