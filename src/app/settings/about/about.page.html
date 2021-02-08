@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>About</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -22,5 +22,16 @@
     <ion-card-content>
       E-ncrypt is open-source and developed by Emiel Kwakkel. CryptoJS will ensure your content will be encrypted / decrypted safely on your device. No external API's are called, nor will any information leave your device.
     </ion-card-content>
+    <ion-item href="https://cryptojs.gitbook.io/docs/" target="_blank" class="ion-activated">
+      <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+      <ion-label>CryptoJS documentation</ion-label>
+      <ion-icon name="open-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item href="https://github.com/emielkwakkel/e-ncrypt" target="_blank">
+      <ion-icon name="logo-github" slot="start"></ion-icon>
+      <ion-label>Application sourcecode</ion-label>
+      <ion-icon name="open-outline" slot="end"></ion-icon>
+    </ion-item>
   </ion-card>
 </ion-content>
