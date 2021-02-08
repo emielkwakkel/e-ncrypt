@@ -8,7 +8,6 @@ import { CryptoService } from '../crypto.service';
 @Component({
   selector: 'app-encrypt',
   templateUrl: 'encrypt.page.html',
-  styleUrls: ['encrypt.page.scss']
 })
 export class EncryptPage implements OnInit, OnDestroy {
   public encryptForm: FormGroup;

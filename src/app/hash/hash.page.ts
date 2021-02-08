@@ -7,7 +7,6 @@ import { AppService, PlatformOptions } from '../app.service';
 @Component({
   selector: 'app-hash',
   templateUrl: 'hash.page.html',
-  styleUrls: ['hash.page.scss']
 })
 export class HashPage implements OnInit {
   public hashForm: FormGroup;
