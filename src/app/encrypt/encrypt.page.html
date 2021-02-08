@@ -38,8 +38,8 @@
     <ion-row class="ion-padding-horizontal">
       <ion-col>
         <ion-button type="submit" color="light" expand="block" (click)="copyOrShare(encryptForm.controls.content.value)" [disabled]="!encryptForm.controls.content.value">
-          <ion-icon slot="start" [name]="(platform !== 'web') ? 'share-outline' : 'clipboard-outline'"></ion-icon>
-          {{ (platform !== 'web') ? 'Share content' : 'Copy content' }}
+          <ion-icon slot="start" [name]="(appService.platform !== 'web') ? 'share-outline' : 'clipboard-outline'"></ion-icon>
+          {{ (appService.platform !== 'web') ? 'Share content' : 'Copy content' }}
         </ion-button>
       </ion-col>
       <ion-col>
