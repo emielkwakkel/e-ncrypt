@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { AlgorithmOptions } from '../crypto.service';
+import { EncryptionAlgorithmOptions, HashingAlgorithmOptions, HashingAlgorithms } from '../crypto.service';
 import { SettingsService } from './settings.service';
 
 @Component({
@@ -9,10 +9,14 @@ import { SettingsService } from './settings.service';
   styleUrls: ['settings.page.scss']
 })
 export class SettingsPage implements OnInit {
+  public hashingAlgorithms = HashingAlgorithms;
   public settingsForm: FormGroup;
   public title = 'Settings';
-  algorithmActionSheetOptions: any = {
+  public encryptionAlgorithmOptions: any = {
     header: 'Select encryption algorythm',
+  };
+  public hashingAlgorithmOptions: any = {
+    header: 'Select hashing algorythm',
   };
 
   constructor(
@@ -23,14 +27,16 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
-      algorithm: [this.settingsService.algorithm],
+      encryptionAlgorithm: [this.settingsService.encryptionAlgorithm],
+      hashingAlgorithm: [this.settingsService.encryptionAlgorithm],
       rounds: [this.settingsService.rounds.value],
       darkMode: [this.settingsService.darkModeEnabled.value],
     });
-    this.settingsForm.get('algorithm').valueChanges.subscribe((selectedValue: AlgorithmOptions) => {
-      console.log('new on settings page', selectedValue);
-      this.settingsService.algorithm.next(selectedValue);
-      console.log('new val', this.settingsService.algorithm);
+    this.settingsForm.controls.encryptionAlgorithm.valueChanges.subscribe((selectedValue: EncryptionAlgorithmOptions) => {
+      this.settingsService.encryptionAlgorithm.next(selectedValue);
+    });
+    this.settingsForm.controls.hashingAlgorithm.valueChanges.subscribe((selectedValue: HashingAlgorithmOptions) => {
+      this.settingsService.hashingAlgorithm.next(selectedValue);
     });
     this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
       this.settingsService.setDarkModeEnabled(selectedValue);

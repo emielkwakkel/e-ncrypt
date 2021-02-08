@@ -20,10 +20,30 @@
       <ion-item>
         <ion-icon slot="start" icon="key-outline"></ion-icon>
         <ion-label>Algorithm</ion-label>
-        <ion-select [interfaceOptions]="algorithmActionSheetOptions" interface="action-sheet" formControlName="algorithm">
+        <ion-select [interfaceOptions]="encryptionAlgorithmOptions" interface="action-sheet" formControlName="encryptionAlgorithm">
           <ion-select-option value="AES">AES</ion-select-option>
           <ion-select-option value="TripleDES">TripleDES</ion-select-option>
           <ion-select-option value="Rabbit">Rabbit</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" icon="reload-outline"></ion-icon>
+        <ion-label position="fixed"># Rounds {{ settingsForm.controls.rounds.value }}</ion-label>
+        <ion-range formControlName="rounds" min="1" max="5" step="1" snaps="true" pin="true"></ion-range>
+      </ion-item>
+      <ion-list-header>
+        <ion-label>Hashing</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-icon slot="start" icon="key-outline"></ion-icon>
+        <ion-label>Algorithm</ion-label>
+        <ion-select [interfaceOptions]="hashingAlgorithmOptions" interface="action-sheet" formControlName="hashingAlgorithm">
+          <ion-select-option [value]="hashingAlgorithms.MD5">MD5 (unsafe)</ion-select-option>
+          <ion-select-option [value]="hashingAlgorithms.SHA1">SHA1</ion-select-option>
+          <ion-select-option [value]="hashingAlgorithms.SHA256">SHA256</ion-select-option>
+          <ion-select-option [value]="hashingAlgorithms.SHA512">SHA512</ion-select-option>
+          <ion-select-option [value]="hashingAlgorithms.SHA3">SHA3</ion-select-option>
+          <ion-select-option [value]="hashingAlgorithms.RIPEMD160">RIPEMD-160</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>

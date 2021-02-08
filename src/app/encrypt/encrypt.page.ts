@@ -46,7 +46,7 @@ export class EncryptPage implements OnInit, OnDestroy {
       this.cryptoService.encrypt(
         this.encryptForm.controls.content.value,
         this.encryptForm.controls.key.value,
-        this.settingsService.algorithm.value,
+        this.settingsService.encryptionAlgorithm.value,
         this.settingsService.rounds.value,
       )
     );
@@ -63,7 +63,7 @@ export class EncryptPage implements OnInit, OnDestroy {
       this.cryptoService.decrypt(
         this.encryptForm.controls.content.value,
         this.encryptForm.controls.key.value,
-        this.settingsService.algorithm.value,
+        this.settingsService.encryptionAlgorithm.value,
         this.settingsService.rounds.value,
       )
     );
