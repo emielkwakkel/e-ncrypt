@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SettingsPage } from './settings.page';
 
 import { SettingsPageRoutingModule } from './settings-routing.module';
-import { SettingsService } from './settings.service';
 
 @NgModule({
   imports: [
@@ -16,6 +15,5 @@ import { SettingsService } from './settings.service';
     SettingsPageRoutingModule,
   ],
   declarations: [SettingsPage],
-  providers: [SettingsService],
 })
 export class SettingsPageModule {}

@@ -14,7 +14,6 @@ const { Share } = Plugins;
   styleUrls: ['encrypt.page.scss']
 })
 export class EncryptPage implements OnInit, OnDestroy {
-  public algorithm = this.settingsService.algorithm;
   public encryptForm: FormGroup;
   public title = 'Encrypt';
   public submitted = false;
@@ -31,7 +30,6 @@ export class EncryptPage implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.algorithm = this.settingsService.algorithm;
     this.encryptForm = this.formBuilder.group({
       type: [this.type],
       key: ['', [Validators.required, Validators.minLength(5)]],
@@ -41,10 +39,6 @@ export class EncryptPage implements OnInit, OnDestroy {
       this.encryptForm.controls.type.valueChanges.subscribe((newType) => {
         console.log('new type', newType);
         this.type = newType;
-      }),
-      this.settingsService.algorithm$.subscribe((newAlgorithm) => {
-        console.log('new Algo', newAlgorithm);
-        this.algorithm = newAlgorithm;
       }),
     ];
     
@@ -58,20 +52,17 @@ export class EncryptPage implements OnInit, OnDestroy {
   }
 
   encrypt() {
-    console.log(this.settingsService);
     this.submitted = true;
     if (!this.encryptForm.valid) {
       return false;
     }
-
-    console.log(this.algorithm);
 
     this.encryptForm.controls.type.setValue('decrypt');
     this.encryptForm.controls.content.setValue(
       this.cryptoService.encrypt(
         this.encryptForm.controls.content.value,
         this.encryptForm.controls.key.value,
-        this.algorithm,
+        this.settingsService.algorithm.value,
         this.settingsService.rounds.value,
       )
     );
@@ -88,7 +79,7 @@ export class EncryptPage implements OnInit, OnDestroy {
       this.cryptoService.decrypt(
         this.encryptForm.controls.content.value,
         this.encryptForm.controls.key.value,
-        this.algorithm,
+        this.settingsService.algorithm.value,
         this.settingsService.rounds.value,
       )
     );

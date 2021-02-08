@@ -29,7 +29,7 @@ export class SettingsPage implements OnInit {
     });
     this.settingsForm.get('algorithm').valueChanges.subscribe((selectedValue: AlgorithmOptions) => {
       console.log('new on settings page', selectedValue);
-      this.settingsService.algorithm = selectedValue;
+      this.settingsService.algorithm.next(selectedValue);
       console.log('new val', this.settingsService.algorithm);
     });
     this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
