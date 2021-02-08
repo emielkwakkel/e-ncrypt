@@ -27,10 +27,11 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
-      encryptionAlgorithm: [this.settingsService.encryptionAlgorithm],
-      hashingAlgorithm: [this.settingsService.encryptionAlgorithm],
-      encryptionRounds: [this.settingsService.encryptionRounds.value],
       darkMode: [this.settingsService.darkModeEnabled.value],
+      encryptionAlgorithm: [this.settingsService.encryptionAlgorithm],
+      encryptionRounds: [this.settingsService.encryptionRounds.value],
+      hashingAlgorithm: [this.settingsService.encryptionAlgorithm],
+      hashingRounds: [this.settingsService.hashingRounds.value],
     });
     this.settingsForm.controls.encryptionAlgorithm.valueChanges.subscribe((selectedValue: EncryptionAlgorithmOptions) => {
       this.settingsService.encryptionAlgorithm.next(selectedValue);
@@ -43,6 +44,9 @@ export class SettingsPage implements OnInit {
     });
     this.settingsForm.get('encryptionRounds').valueChanges.subscribe((selectedValue: number) => {
       this.settingsService.encryptionRounds.next(selectedValue);
+    });
+    this.settingsForm.get('hashingRounds').valueChanges.subscribe((selectedValue: number) => {
+      this.settingsService.hashingRounds.next(selectedValue);
     });
 
     // Check if dark mode preference on device changes

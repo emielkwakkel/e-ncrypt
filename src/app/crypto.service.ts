@@ -23,7 +23,7 @@ export class CryptoService {
     content: string,
     secretKey: string,
     algorithm: EncryptionAlgorithmOptions = EncryptionAlgorithms.AES,
-    encryptionRounds: number,
+    encryptionRounds = 1,
   ): string {
     Array.from(Array(encryptionRounds)).forEach(() => {
       content = CryptoJS[algorithm]
@@ -38,7 +38,7 @@ export class CryptoService {
     content: string,
     secretKey: string,
     algorithm: EncryptionAlgorithmOptions = EncryptionAlgorithms.AES,
-    encryptionRounds: number,
+    encryptionRounds = 1,
   ) {
     Array.from(Array(encryptionRounds)).forEach(() => {
       content = CryptoJS[algorithm]
@@ -51,9 +51,9 @@ export class CryptoService {
   hash(
     content: string,
     algorithm: HashingAlgorithmOptions = HashingAlgorithms.SHA512,
-    encryptionRounds: number,
+    hashingRounds = 1,
   ) {
-    Array.from(Array(encryptionRounds)).forEach(() => {
+    Array.from(Array(hashingRounds)).forEach(() => {
       content = CryptoJS[algorithm](content)
         .toString();
     });

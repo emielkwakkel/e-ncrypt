@@ -15,8 +15,10 @@ export class SettingsService {
   public darkModeEnabled$ = this.darkModeEnabled.asObservable();
   public hashingAlgorithm = new BehaviorSubject<HashingAlgorithmOptions>(HashingAlgorithms.SHA512);
   public hashingAlgorithm$ = this.hashingAlgorithm.asObservable();
-  public encryptionRounds = new BehaviorSubject<number>(5);
+  public encryptionRounds = new BehaviorSubject<number>(1);
   public encryptionRounds$ = this.encryptionRounds.asObservable();
+  public hashingRounds = new BehaviorSubject<number>(1);
+  public hashingRounds$ = this.encryptionRounds.asObservable();
 
   isDarkModePreferred(): MediaQueryList {
     return window.matchMedia('(prefers-color-scheme: dark)');

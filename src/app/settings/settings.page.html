@@ -28,7 +28,7 @@
       </ion-item>
       <ion-item>
         <ion-icon slot="start" icon="reload-outline"></ion-icon>
-        <ion-label position="fixed"># encryptionRounds {{ settingsForm.controls.encryptionRounds.value }}</ion-label>
+        <ion-label position="fixed"># Rounds {{ settingsForm.controls.encryptionRounds.value }}</ion-label>
         <ion-range formControlName="encryptionRounds" min="1" max="5" step="1" snaps="true" pin="true"></ion-range>
       </ion-item>
       <ion-list-header>
@@ -48,8 +48,8 @@
       </ion-item>
       <ion-item>
         <ion-icon slot="start" icon="reload-outline"></ion-icon>
-        <ion-label position="fixed"># encryptionRounds {{ settingsForm.controls.encryptionRounds.value }}</ion-label>
-        <ion-range formControlName="encryptionRounds" min="1" max="5" step="1" snaps="true" pin="true"></ion-range>
+        <ion-label position="fixed"># Rounds {{ settingsForm.controls.hashingRounds.value }}</ion-label>
+        <ion-range formControlName="hashingRounds" min="1" max="5" step="1" snaps="true" pin="true"></ion-range>
       </ion-item>
       <ion-list-header>
         <ion-label>Appearance</ion-label>
