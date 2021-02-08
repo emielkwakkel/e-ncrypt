@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs"
-import { AlgorithmOptions, Algoritms } from "../encrypt/crypto.service";
+import { AlgorithmOptions, Algorithms } from "../encrypt/crypto.service";
 
 @Injectable({providedIn: 'root'})
 export class SettingsService {
-  public algorithm = new BehaviorSubject<AlgorithmOptions>(Algoritms.AES);
+  public algorithm = new BehaviorSubject<AlgorithmOptions>(Algorithms.AES);
   public algorithm$ = this.algorithm.asObservable();
   public darkModeEnabled = new BehaviorSubject<boolean>(this.isDarkModePreferred().matches);
   public darkModeEnabled$ = this.darkModeEnabled.asObservable();

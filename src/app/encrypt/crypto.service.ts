@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js'
 
 export type AlgorithmOptions = 'AES' | 'TripleDES' | 'Rabbit';
-export enum Algoritms {
+export enum Algorithms {
   AES = 'AES',
   TripleDES = 'TripleDES',
   Rabbit = 'Rabbit'
@@ -12,7 +12,7 @@ export class CryptoService {
   encrypt(
     content: string,
     secretKey: string,
-    algorithm: AlgorithmOptions = Algoritms.AES,
+    algorithm: AlgorithmOptions = Algorithms.AES,
     rounds: number,
   ) {
     return CryptoJS[algorithm]
@@ -23,7 +23,7 @@ export class CryptoService {
   decrypt(
     content: string,
     secretKey: string,
-    algorithm: AlgorithmOptions = Algoritms.AES,
+    algorithm: AlgorithmOptions = Algorithms.AES,
     rounds: number,
   ) {
     return CryptoJS[algorithm]
