@@ -39,7 +39,7 @@ export class HashPage implements OnInit {
       this.cryptoService.hash(
         this.hashForm.controls.content.value,
         this.settingsService.hashingAlgorithm.value,
-        this.settingsService.rounds.value,
+        this.settingsService.encryptionRounds.value,
       )
     );
   }

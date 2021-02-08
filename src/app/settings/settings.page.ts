@@ -29,7 +29,7 @@ export class SettingsPage implements OnInit {
     this.settingsForm = this.formBuilder.group({
       encryptionAlgorithm: [this.settingsService.encryptionAlgorithm],
       hashingAlgorithm: [this.settingsService.encryptionAlgorithm],
-      rounds: [this.settingsService.rounds.value],
+      encryptionRounds: [this.settingsService.encryptionRounds.value],
       darkMode: [this.settingsService.darkModeEnabled.value],
     });
     this.settingsForm.controls.encryptionAlgorithm.valueChanges.subscribe((selectedValue: EncryptionAlgorithmOptions) => {
@@ -41,8 +41,8 @@ export class SettingsPage implements OnInit {
     this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
       this.settingsService.setDarkModeEnabled(selectedValue);
     });
-    this.settingsForm.get('rounds').valueChanges.subscribe((selectedValue: number) => {
-      this.settingsService.rounds.next(selectedValue);
+    this.settingsForm.get('encryptionRounds').valueChanges.subscribe((selectedValue: number) => {
+      this.settingsService.encryptionRounds.next(selectedValue);
     });
 
     // Check if dark mode preference on device changes
