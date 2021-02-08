@@ -11,7 +11,7 @@ import { AppService, PlatformOptions } from '../app.service';
 })
 export class HashPage implements OnInit {
   public hashForm: FormGroup;
-  public title = 'Hash';
+  public title = 'Hashing';
   public submitted = false;
   public platform: PlatformOptions;
 
@@ -19,7 +19,7 @@ export class HashPage implements OnInit {
     public appService: AppService,
     private formBuilder: FormBuilder,
     private cryptoService: CryptoService,
-    private settingsService: SettingsService,
+    public settingsService: SettingsService,
   ) {
   }
 
@@ -38,7 +38,7 @@ export class HashPage implements OnInit {
     this.hashForm.controls.content.setValue(
       this.cryptoService.hash(
         this.hashForm.controls.content.value,
-        this.settingsService.hash.value,
+        this.settingsService.hashingAlgorithm.value,
         this.settingsService.rounds.value,
       )
     );
