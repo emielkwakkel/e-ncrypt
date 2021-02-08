@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 import { AlgorithmOptions } from '../encrypt/crypto.service';
+import { AboutPage } from './about/about.page';
 import { SettingsService } from './settings.service';
 
 @Component({

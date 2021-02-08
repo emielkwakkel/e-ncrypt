@@ -41,16 +41,15 @@
         </ion-label>
         <ion-toggle formControlName="darkMode"></ion-toggle>
       </ion-item>
+      <ion-list-header>
+        <ion-label>Generic</ion-label>
+      </ion-list-header>
+      <ion-item button [routerLink]="['/tabs/settings/about']">
+        <ion-icon slot="start" icon="information-circle-outline"></ion-icon>
+        <ion-label>
+          About
+        </ion-label>
+      </ion-item>
     </ion-list>
   </form>
-  <ion-card>
-    <img src="assets/encryption-banner.jpeg" />
-    <ion-card-header>
-      <ion-card-subtitle>E-ncrypt</ion-card-subtitle>
-      <ion-card-title>About</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      E-ncrypt is open-source and developed by Emiel Kwakkel. CryptoJS will ensure your content will be encrypted / decrypted safely on your device. No external API's are called, nor will any information leave your device.
-    </ion-card-content>
-  </ion-card>
 </ion-content>

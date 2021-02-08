@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: SettingsPage,
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   }
 ];
 
