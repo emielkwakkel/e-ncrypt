@@ -5,7 +5,7 @@ import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AppService } from '../app.service';
 import { SettingsService } from '../settings/settings.service';
-import { CryptoService } from './crypto.service';
+import { CryptoService } from '../crypto.service';
 const { Share } = Plugins;
 
 @Component({

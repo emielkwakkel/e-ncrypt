@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs"
-import { AlgorithmOptions, Algorithms } from "../encrypt/crypto.service";
+import { AlgorithmOptions, Algorithms } from "../crypto.service";
 
 @Injectable({providedIn: 'root'})
 export class SettingsService {
