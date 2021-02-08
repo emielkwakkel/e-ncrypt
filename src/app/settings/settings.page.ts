@@ -23,16 +23,21 @@ export class SettingsPage implements OnInit {
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
-      algorithm: [this.settingsService.algorithm.value],
+      algorithm: [this.settingsService.algorithm],
+      rounds: [this.settingsService.rounds.value],
       darkMode: [this.settingsService.darkModeEnabled.value],
     });
     this.settingsForm.get('algorithm').valueChanges.subscribe((selectedValue: AlgorithmOptions) => {
-      this.settingsService.algorithm.next(selectedValue)
+      console.log('new on settings page', selectedValue);
+      this.settingsService.algorithm = selectedValue;
+      console.log('new val', this.settingsService.algorithm);
     });
     this.settingsForm.get('darkMode').valueChanges.subscribe((selectedValue: boolean) => {
       this.settingsService.setDarkModeEnabled(selectedValue);
     });
-
+    this.settingsForm.get('rounds').valueChanges.subscribe((selectedValue: number) => {
+      this.settingsService.rounds.next(selectedValue);
+    });
 
     // Check if dark mode preference on device changes
     this.settingsService.isDarkModePreferred()

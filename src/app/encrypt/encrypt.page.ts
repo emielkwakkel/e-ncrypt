@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Plugins } from '@capacitor/core';
 import { ToastController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { AppService } from '../app.service';
 import { SettingsService } from '../settings/settings.service';
-import { CryptoService } from './crypto.service';
+import { AlgorithmOptions, CryptoService } from './crypto.service';
 const { Share } = Plugins;
 
 @Component({
@@ -12,10 +13,12 @@ const { Share } = Plugins;
   templateUrl: 'encrypt.page.html',
   styleUrls: ['encrypt.page.scss']
 })
-export class EncryptPage implements OnInit {
+export class EncryptPage implements OnInit, OnDestroy {
+  public algorithm = this.settingsService.algorithm;
   public encryptForm: FormGroup;
   public title = 'Encrypt';
   public submitted = false;
+  private subscriptions: Subscription[];
   public platform: 'ios' | 'android' | 'electron' | 'web';
   public type: 'encrypt' | 'decrypt' = 'encrypt';
 
@@ -28,31 +31,48 @@ export class EncryptPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.algorithm = this.settingsService.algorithm;
     this.encryptForm = this.formBuilder.group({
       type: [this.type],
       key: ['', [Validators.required, Validators.minLength(5)]],
       content: ['', [Validators.required]],
     });
-    this.encryptForm.controls.type.valueChanges.subscribe((selectedValue) => {
-      this.type = selectedValue;
-    });
+    this.subscriptions = [
+      this.encryptForm.controls.type.valueChanges.subscribe((newType) => {
+        console.log('new type', newType);
+        this.type = newType;
+      }),
+      this.settingsService.algorithm$.subscribe((newAlgorithm) => {
+        console.log('new Algo', newAlgorithm);
+        this.algorithm = newAlgorithm;
+      }),
+    ];
+    
     this.appService.device.then(({ platform }) => {
       this.platform = platform;
     });
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   encrypt() {
+    console.log(this.settingsService);
     this.submitted = true;
     if (!this.encryptForm.valid) {
       return false;
     }
+
+    console.log(this.algorithm);
 
     this.encryptForm.controls.type.setValue('decrypt');
     this.encryptForm.controls.content.setValue(
       this.cryptoService.encrypt(
         this.encryptForm.controls.content.value,
         this.encryptForm.controls.key.value,
-        this.settingsService.algorithm.value,
+        this.algorithm,
+        this.settingsService.rounds.value,
       )
     );
   }
@@ -68,7 +88,8 @@ export class EncryptPage implements OnInit {
       this.cryptoService.decrypt(
         this.encryptForm.controls.content.value,
         this.encryptForm.controls.key.value,
-        this.settingsService.algorithm.value,
+        this.algorithm,
+        this.settingsService.rounds.value,
       )
     );
   }

@@ -12,8 +12,10 @@ export class CryptoService {
   encrypt(
     content: string,
     secretKey: string,
-    algorithm: AlgorithmOptions = Algoritms.AES
+    algorithm: AlgorithmOptions = Algoritms.AES,
+    rounds: number,
   ) {
+    console.log(algorithm, rounds);
     return CryptoJS[algorithm]
       .encrypt(content, secretKey, { iv })
       .toString();
@@ -22,8 +24,10 @@ export class CryptoService {
   decrypt(
     content: string,
     secretKey: string,
-    algorithm: AlgorithmOptions = Algoritms.AES
+    algorithm: AlgorithmOptions = Algoritms.AES,
+    rounds: number,
   ) {
+    console.log(algorithm, rounds);
     return CryptoJS[algorithm]
       .decrypt(content, secretKey, { iv })
       .toString(CryptoJS.enc.Utf8);
