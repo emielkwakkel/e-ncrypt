@@ -33,7 +33,7 @@
     </ion-item>
     <ion-item lines="full" class="ion-padding-bottom">
       <ion-label [color]="(hasErrors('content')) ? 'danger' : ''" position="stacked">Content</ion-label>
-      <ion-textarea [color]="(hasErrors('content')) ? 'danger' : ''" formControlName="content" rows="5" [placeholder]="'Enter content to ' + ((type === 'encrypt') ? 'encrypt' : 'decrypt')"></ion-textarea>
+      <ion-textarea [color]="(hasErrors('content')) ? 'danger' : ''" formControlName="content" rows="5" [placeholder]="'Enter content to ' + ((encryptForm.controls.type.value === 'encrypt') ? 'encrypt' : 'decrypt')"></ion-textarea>
     </ion-item>
     <ion-row class="ion-padding-horizontal">
       <ion-col>
@@ -43,11 +43,11 @@
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button *ngIf="type === 'encrypt'" type="submit" color="success" expand="block" (click)="encrypt()" [disabled]="!encryptForm.valid">
+        <ion-button *ngIf="encryptForm.controls.type.value === 'encrypt'" type="submit" color="success" expand="block" (click)="encrypt()" [disabled]="!encryptForm.valid">
           <ion-icon slot="start" name="eye-off-outline"></ion-icon>
           Encrypt
         </ion-button>
-        <ion-button *ngIf="type === 'decrypt'" type="submit" color="danger" expand="block" (click)="decrypt()" [disabled]="!encryptForm.valid">
+        <ion-button *ngIf="encryptForm.controls.type.value === 'decrypt'" type="submit" color="danger" expand="block" (click)="decrypt()" [disabled]="!encryptForm.valid">
           <ion-icon slot="start" name="eye-outline"></ion-icon>
           Decrypt
         </ion-button>

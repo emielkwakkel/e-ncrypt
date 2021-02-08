@@ -19,7 +19,6 @@ export class EncryptPage implements OnInit, OnDestroy {
   public submitted = false;
   private subscriptions: Subscription[];
   public platform: 'ios' | 'android' | 'electron' | 'web';
-  public type: 'encrypt' | 'decrypt' = 'encrypt';
 
   constructor(
     private appService: AppService,
@@ -31,16 +30,10 @@ export class EncryptPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.encryptForm = this.formBuilder.group({
-      type: [this.type],
+      type: ['encrypt'],
       key: ['', [Validators.required, Validators.minLength(5)]],
       content: ['', [Validators.required]],
     });
-    this.subscriptions = [
-      this.encryptForm.controls.type.valueChanges.subscribe((newType) => {
-        console.log('new type', newType);
-        this.type = newType;
-      }),
-    ];
     
     this.appService.device.then(({ platform }) => {
       this.platform = platform;
