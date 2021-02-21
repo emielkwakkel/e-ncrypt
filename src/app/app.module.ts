@@ -10,14 +10,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SettingsService } from './settings/settings.service';
 import { AppService } from './app.service';
+import { SettingsPageModule } from './settings/settings.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+  ],
   entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    SettingsPageModule,
   ],
   providers: [
     AppService,

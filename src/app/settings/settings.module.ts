@@ -14,6 +14,11 @@ import { SettingsPageRoutingModule } from './settings-routing.module';
     ReactiveFormsModule,
     SettingsPageRoutingModule,
   ],
-  declarations: [ SettingsPage ],
+  declarations: [
+    SettingsPage,
+  ],
+  exports: [
+    SettingsPage,
+  ]
 })
 export class SettingsPageModule {}
