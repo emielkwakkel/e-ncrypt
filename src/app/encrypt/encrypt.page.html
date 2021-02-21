@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">{{ title }}</ion-title>
+      <ion-title size="large">{{ title }} <small>({{ settingsService.encryptionAlgorithm.value }})</small></ion-title>
     </ion-toolbar>
   </ion-header>
   <form [formGroup]="encryptForm">
