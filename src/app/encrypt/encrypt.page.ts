@@ -70,7 +70,7 @@ export class EncryptPage implements OnInit, OnDestroy {
 
   clear() {
     this.encryptForm.controls.content.setValue('');
-    this.encryptForm.markAsUntouched();
+    this.encryptForm.controls.content.markAsUntouched();
   }
 
   async copyOrShare(text: string) {

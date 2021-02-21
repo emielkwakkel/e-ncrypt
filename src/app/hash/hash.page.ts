@@ -43,6 +43,11 @@ export class HashPage implements OnInit {
     );
   }
 
+  clear() {
+    this.hashForm.controls.content.setValue('');
+    this.hashForm.controls.content.markAsUntouched();
+  }
+
   hasErrors(formControlName: string) {
     return this.hashForm.controls[formControlName].touched && !!this.hashForm.controls[formControlName].errors;
   }
