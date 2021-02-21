@@ -34,7 +34,17 @@ export class SettingsPage implements OnInit, OnDestroy {
       hashingRounds: [this.settingsService.hashingRounds.value],
     });
 
-    this.subscriptions = [
+    this.subscriptions = this.setSubscriptions();
+    this.isDarkModePreferred();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeSubscriptions(this.subscriptions);
+  }
+
+  setSubscriptions(): Subscription[] {
+    return [
+      // Update service when value changes
       this.settingsForm.controls.encryptionAlgorithm.valueChanges.subscribe((selectedValue: EncryptionAlgorithmOptions) => {
         this.settingsService.encryptionAlgorithm.next(selectedValue);
       }),
@@ -50,17 +60,39 @@ export class SettingsPage implements OnInit, OnDestroy {
       this.settingsForm.controls.hashingRounds.valueChanges.subscribe((selectedValue: number) => {
         this.settingsService.hashingRounds.next(selectedValue);
       }),
+      // Update form when service changes
+      this.settingsService.encryptionAlgorithm$.subscribe((selectedValue: EncryptionAlgorithmOptions) => {
+        this.settingsForm.controls.encryptionAlgorithm.setValue(selectedValue, { emitEvent: false });
+      }),
+      this.settingsService.hashingAlgorithm$.subscribe((selectedValue: HashingAlgorithmOptions) => {
+        this.settingsForm.controls.hashingAlgorithm.setValue(selectedValue, { emitEvent: false });
+      }),
+      // TODO: Add Darkmode too
+      this.settingsService.encryptionRounds$.subscribe((selectedValue: number) => {
+        this.settingsForm.controls.encryptionRounds.setValue(selectedValue, { emitEvent: false });
+      }),
+      this.settingsService.hashingRounds$.subscribe((selectedValue: number) => {
+        this.settingsForm.controls.hashingRounds.setValue(selectedValue, { emitEvent: false });
+      }),
     ]
+  }
 
-    // Check if dark mode preference on device changes
+  /**
+   * Unsubscribes each subscription
+   * @param subscriptions Subscription[] Array of subscriptions
+   */
+  unsubscribeSubscriptions(subscriptions: Subscription[]) {
+    subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  /**
+   * Check if dark mode preference on device changes
+   */
+  isDarkModePreferred(): void {
     this.settingsService.isDarkModePreferred()
       .addEventListener('change', (event) => {
         return this.checkDarkModeToggle(event.matches);
       });
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   checkDarkModeToggle(shouldCheck: boolean) {

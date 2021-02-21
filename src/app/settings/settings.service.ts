@@ -18,7 +18,7 @@ export class SettingsService {
   public encryptionRounds = new BehaviorSubject<number>(1);
   public encryptionRounds$ = this.encryptionRounds.asObservable();
   public hashingRounds = new BehaviorSubject<number>(1);
-  public hashingRounds$ = this.encryptionRounds.asObservable();
+  public hashingRounds$ = this.hashingRounds.asObservable();
 
   isDarkModePreferred(): MediaQueryList {
     return window.matchMedia('(prefers-color-scheme: dark)');
