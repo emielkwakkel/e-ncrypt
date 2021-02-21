@@ -19,7 +19,7 @@ export class EncryptPage implements OnInit, OnDestroy {
     public appService: AppService,
     private formBuilder: FormBuilder,
     private cryptoService: CryptoService,
-    private settingsService: SettingsService,
+    public settingsService: SettingsService,
   ) {}
 
   ngOnInit() {
