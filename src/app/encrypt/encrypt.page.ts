@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { AppService } from '../app.service';
 import { SettingsService } from '../settings/settings.service';
 import { CryptoService } from '../crypto.service';
@@ -10,11 +9,10 @@ import { CryptoService } from '../crypto.service';
   templateUrl: 'encrypt.page.html',
   styleUrls: ['encrypt.page.css'],
 })
-export class EncryptPage implements OnInit, OnDestroy {
+export class EncryptPage implements OnInit {
   public encryptForm: FormGroup;
   public title = 'Encryption';
   public submitted = false;
-  private subscriptions: Subscription[];
 
   constructor(
     public appService: AppService,
@@ -29,10 +27,6 @@ export class EncryptPage implements OnInit, OnDestroy {
       key: ['', [Validators.required, Validators.minLength(5)]],
       content: ['', [Validators.required]],
     });
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   encrypt() {
