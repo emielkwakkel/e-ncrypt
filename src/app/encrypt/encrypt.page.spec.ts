@@ -19,8 +19,8 @@ describe('EncryptPage', () => {
       declarations: [ EncryptPage ],
       imports: [ IonicModule.forRoot(), ReactiveFormsModule ],
       providers: [
-        { provide: AppService, useValue:  appServiceSpy },
-        { provide: CryptoService, useValue:  cryptoServiceSpy },
+        { provide: AppService, useValue: appServiceSpy },
+        { provide: CryptoService, useValue: cryptoServiceSpy },
       ],
     }).compileComponents();
 
