@@ -1,5 +1,7 @@
 import CryptoJS from 'crypto-js'
 
+const ivKey = '6673236444466877242372777172656d6e266278753369795e6632333471772c2e';
+
 export type EncryptionAlgorithmOptions = 'AES' | 'TripleDES' | 'Rabbit';
 export enum EncryptionAlgorithms {
   AES = 'AES',
@@ -16,14 +18,13 @@ export enum HashingAlgorithms {
   SHA3 = 'SHA3',
   RIPEMD160 = 'RIPEMD160',
 }
-
-const iv = CryptoJS.enc.Hex.parse('6673236444466877242372777172656d6e266278753369795e6632333471772c2e');
 export class CryptoService {
   encrypt(
     content: string,
     secretKey: string,
     algorithm: EncryptionAlgorithmOptions = EncryptionAlgorithms.AES,
     encryptionRounds = 1,
+    iv = CryptoJS.enc.Hex.parse(ivKey)
   ): string {
     Array.from(Array(encryptionRounds)).forEach(() => {
       content = CryptoJS[algorithm]
@@ -39,6 +40,7 @@ export class CryptoService {
     secretKey: string,
     algorithm: EncryptionAlgorithmOptions = EncryptionAlgorithms.AES,
     encryptionRounds = 1,
+    iv = CryptoJS.enc.Hex.parse(ivKey)
   ) {
     Array.from(Array(encryptionRounds)).forEach(() => {
       content = CryptoJS[algorithm]
