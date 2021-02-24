@@ -96,8 +96,7 @@ export class SettingsPage implements OnInit, OnDestroy {
   }
 
   checkDarkModeToggle(shouldCheck: boolean) {
-    this.settingsForm
-      .get('darkMode')
+    this.settingsForm.controls.darkMode
       .setValue(shouldCheck);
   }
 }
