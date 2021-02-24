@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SettingsPage } from './settings.page';
 import { SettingsService } from './settings.service';
 
-fdescribe('SettingsPage', () => {
+describe('SettingsPage', () => {
   let component: SettingsPage;
   let fixture: ComponentFixture<SettingsPage>;
 
